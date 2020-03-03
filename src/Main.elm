@@ -10,6 +10,7 @@ type Msg
     = Increase
     | Decrease
 
+view : Int -> Html.Html Msg
 view model =
     layout [] <|
         column []
