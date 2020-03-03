@@ -6,6 +6,10 @@ import Element.Border as Border
 import Element.Input as Input
 import Html
 
+type Msg
+    = Increase
+    | Decrease
+
 view model =
     layout [] <|
         column []
@@ -18,13 +22,24 @@ view model =
                 , Border.rounded 10
                 ]
                 { label = text "+1", onPress = Just Increase }
+            , Input.button 
+                [Border.width 1
+                , padding 10
+                , Border.rounded 10
+                ]
+                { label = text "-1", onPress = Just Decrease }
             ]
 
-update: a -> b -> number
+update : Msg -> Int -> Int
 update msg model =
-    3
+    case msg of
+        Increase ->
+            model + 1
+    
+        Decrease ->
+            model - 1
 
-main : Program () Int msg
+main : Program () Int Msg
 main =
     Browser.sandbox
     { init = 0
